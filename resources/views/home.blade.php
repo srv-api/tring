@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Top Up Game - Tring.id')
+@section('title', 'Tring.id - Top Up Game ')
 
 @section('topup-active', 'active')
 
