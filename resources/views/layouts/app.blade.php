@@ -25,6 +25,7 @@
         href="{{ asset('tring.png') }}"
     >
 
+    {{-- GOOGLE FONT --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
     <link
@@ -38,6 +39,7 @@
         rel="stylesheet"
     >
 
+    {{-- BOOTSTRAP ICON --}}
     <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
@@ -408,6 +410,7 @@
 
         .navigation-dropdown a:hover
         .dropdown-icon,
+
         .navigation-dropdown a.active
         .dropdown-icon {
 
@@ -500,7 +503,9 @@
 
             font-weight: 600;
 
-            transition: background .2s ease;
+            transition:
+                background .2s ease,
+                border-color .2s ease;
 
         }
 
@@ -509,10 +514,68 @@
 
             background: rgba(255, 255, 255, .08);
 
+            border-color: rgba(255, 255, 255, .5);
+
         }
 
 
         .history-button i {
+
+            font-size: 14px;
+
+        }
+
+
+        /* =========================
+           DOWNLOAD APP BUTTON
+        ========================= */
+
+        .download-app-button {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 7px;
+
+            background: var(--white);
+
+            color: var(--primary);
+
+            border: 1px solid var(--white);
+
+            padding: 9px 13px;
+
+            border-radius: 9px;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            white-space: nowrap;
+
+            transition:
+                background .2s ease,
+                color .2s ease,
+                transform .2s ease;
+
+        }
+
+
+        .download-app-button:hover {
+
+            background: var(--primary-light);
+
+            color: var(--primary-dark);
+
+            transform: translateY(-1px);
+
+        }
+
+
+        .download-app-button i {
 
             font-size: 14px;
 
@@ -544,6 +607,8 @@
             justify-content: center;
 
             transition: background .2s ease;
+
+            flex-shrink: 0;
 
         }
 
@@ -664,6 +729,33 @@
            RESPONSIVE
         ========================= */
 
+        @media (max-width: 1100px) {
+
+            .navigation {
+
+                gap: 20px;
+
+            }
+
+            .download-app-button span {
+
+                display: none;
+
+            }
+
+            .download-app-button {
+
+                width: 35px;
+
+                height: 35px;
+
+                padding: 0;
+
+            }
+
+        }
+
+
         @media (max-width: 900px) {
 
             .navigation {
@@ -707,6 +799,15 @@
             }
 
 
+            .header-right {
+
+                gap: 7px;
+
+            }
+
+
+            /* RIWAYAT */
+
             .history-button span {
 
                 display: none;
@@ -734,6 +835,37 @@
             }
 
 
+            /* DOWNLOAD */
+
+            .download-app-button span {
+
+                display: none;
+
+            }
+
+
+            .download-app-button {
+
+                width: 35px;
+
+                height: 35px;
+
+                padding: 0;
+
+                justify-content: center;
+
+            }
+
+
+            .download-app-button i {
+
+                font-size: 15px;
+
+            }
+
+
+            /* PROFILE */
+
             .profile {
 
                 width: 35px;
@@ -742,6 +874,8 @@
 
             }
 
+
+            /* FOOTER */
 
             .footer-container {
 
@@ -782,7 +916,9 @@
         <div class="header-container">
 
 
-            {{-- LOGO --}}
+            {{-- =========================
+                 LOGO
+            ========================= --}}
 
             <a
                 href="{{ url('/') }}"
@@ -803,7 +939,6 @@
             </a>
 
 
-
             {{-- =========================
                  NAVIGATION
             ========================= --}}
@@ -816,7 +951,6 @@
                 ========================= --}}
 
                 <div class="navigation-item">
-
 
                     <a
                         href="#"
@@ -831,15 +965,12 @@
                     </a>
 
 
-
-                    {{-- DROPDOWN PERSONAL --}}
+                    {{-- PERSONAL DROPDOWN --}}
 
                     <div class="navigation-dropdown">
 
 
-                        {{-- =========================
-                             TRING GAME
-                        ========================= --}}
+                        {{-- TRING GAME --}}
 
                         <a
                             href="{{ route('topup.index') }}"
@@ -873,10 +1004,7 @@
                         </a>
 
 
-
-                        {{-- =========================
-                             TRING WALLET
-                        ========================= --}}
+                        {{-- TRING WALLET --}}
 
                         <a
                             href="#"
@@ -912,9 +1040,7 @@
 
                     </div>
 
-
                 </div>
-
 
 
                 {{-- =========================
@@ -922,7 +1048,6 @@
                 ========================= --}}
 
                 <div class="navigation-item">
-
 
                     <a
                         href="#"
@@ -933,12 +1058,10 @@
 
                     </a>
 
-
                 </div>
 
 
             </nav>
-
 
 
             {{-- =========================
@@ -948,16 +1071,18 @@
             <div class="header-right">
 
 
-                {{-- RIWAYAT --}}
+                {{-- =========================
+                     RIWAYAT
+                ========================= --}}
 
                 <a
                     href="#"
                     class="history-button"
                     aria-label="Riwayat"
+                    title="Riwayat"
                 >
 
                     <i class="bi bi-clock-history"></i>
-
 
                     <span>
 
@@ -965,17 +1090,40 @@
 
                     </span>
 
+                </a>
+
+
+                {{-- =========================
+                     DOWNLOAD APLIKASI
+                ========================= --}}
+
+                <a
+                    href="#"
+                    class="download-app-button"
+                    aria-label="Download Aplikasi"
+                    title="Download Aplikasi"
+                >
+
+                    <i class="bi bi-google-play"></i>
+
+                    <span>
+
+                        Download Aplikasi
+
+                    </span>
 
                 </a>
 
 
-
-                {{-- PROFILE --}}
+                {{-- =========================
+                     PROFILE
+                ========================= --}}
 
                 <a
                     href="{{ route('login') }}"
                     class="profile"
                     aria-label="Login"
+                    title="Login"
                 >
 
                     <i class="bi bi-person"></i>
@@ -985,11 +1133,9 @@
 
             </div>
 
-
         </div>
 
     </header>
-
 
 
     {{-- =========================
@@ -997,7 +1143,6 @@
     ========================= --}}
 
     @yield('content')
-
 
 
     {{-- =========================
@@ -1021,7 +1166,6 @@
                         class="footer-logo-image"
                     >
 
-
                     <span>
 
                         Tring.id
@@ -1040,17 +1184,16 @@
             </div>
 
 
-
             {{-- FOOTER LINKS --}}
 
             <div class="footer-links">
-
 
                 <a href="#">
 
                     Tentang Kami
 
                 </a>
+
 
                 <a href="#">
 
@@ -1072,14 +1215,12 @@
 
                 </a>
 
-
             </div>
 
 
         </div>
 
     </footer>
-
 
 
     @stack('scripts')

@@ -132,3 +132,24 @@ Route::post('/midtrans/notification', [
     'midtransNotification'
 ])->name('midtrans.notification');
 
+
+Route::get('/sitemap.xml', function () {
+    $urls = [
+        url('/'),
+    ];
+
+    $xml = '<?xml version="1.0" encoding="UTF-8"?>';
+
+    $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+
+    foreach ($urls as $url) {
+        $xml .= '<url>';
+        $xml .= '<loc>' . htmlspecialchars($url, ENT_XML1, 'UTF-8') . '</loc>';
+        $xml .= '</url>';
+    }
+
+    $xml .= '</urlset>';
+
+    return response($xml, 200)
+        ->header('Content-Type', 'application/xml; charset=UTF-8');
+})->name('sitemap');
