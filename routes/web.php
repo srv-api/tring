@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TopUpController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\TransactionController;
 
 
 /*
@@ -153,3 +154,9 @@ Route::get('/sitemap.xml', function () {
     return response($xml, 200)
         ->header('Content-Type', 'application/xml; charset=UTF-8');
 })->name('sitemap');
+
+Route::get('/cek-transaksi', [TransactionController::class, 'index'])
+    ->name('transaction.check');
+
+Route::post('/cek-transaksi', [TransactionController::class, 'check'])
+    ->name('transaction.check.submit');
