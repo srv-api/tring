@@ -1194,7 +1194,7 @@
             <div class="mobile-logo">
 
                 <img
-                    src="{{ asset('logo.png') }}"
+                    src="{{ asset('tr.png') }}"
                     alt="Tring.id"
                 >
 
