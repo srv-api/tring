@@ -89,6 +89,20 @@
             box-sizing: border-box;
         }
 
+/* =========================================================
+   TURNSTILE
+========================================================= */
+
+.turnstile-wrapper {
+    margin-top: 4px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.cf-turnstile {
+    min-height: 65px;
+}
 
         body {
 
@@ -1054,6 +1068,11 @@
         }
 
     </style>
+<script
+    src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+    async
+    defer>
+</script>
 
 </head>
 
@@ -1317,7 +1336,10 @@
 
                 </div>
 
-
+        <div class="turnstile-wrapper"> 
+            <div class="cf-turnstile" data-sitekey="{{ config('services.turnstile.site_key') }}"> 
+            </div> 
+        </div>
                 {{-- OPTIONS --}}
 
                 <div class="form-options">
@@ -1337,10 +1359,7 @@
 
                     </label>
 
-                <div
-                        class="cf-turnstile"
-                        data-sitekey="{{ config('services.turnstile.site_key') }}">
-                    </div>
+
                     @if (Route::has('password.request'))
 
                         <a
