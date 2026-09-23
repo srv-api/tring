@@ -1337,7 +1337,10 @@
 
                     </label>
 
-
+                <div
+                        class="cf-turnstile"
+                        data-sitekey="{{ config('services.turnstile.site_key') }}">
+                    </div>
                     @if (Route::has('password.request'))
 
                         <a

@@ -34,13 +34,17 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
-'digiflazz' => [
-    'username' => env('DIGIFLAZZ_USERNAME'),
-    'api_key' => env('DIGIFLAZZ_API_KEY'),
-    'base_url' => env(
-        'DIGIFLAZZ_BASE_URL',
-        'https://api.digiflazz.com/v1'
-    ),
-],
+    'digiflazz' => [
+        'username' => env('DIGIFLAZZ_USERNAME'),
+        'api_key' => env('DIGIFLAZZ_API_KEY'),
+        'base_url' => env(
+            'DIGIFLAZZ_BASE_URL',
+            'https://api.digiflazz.com/v1'
+        ),
+    ],
+    'turnstile' => [
+    'site_key' => env('TURNSTILE_SITE_KEY'),
+    'secret_key' => env('TURNSTILE_SECRET_KEY'),
+    ],
 
 ];
