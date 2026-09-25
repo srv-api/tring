@@ -848,7 +848,7 @@
                             <div class="dropdown-content">
 
                                 <span class="dropdown-title">
-                                    Tring POS
+                                    POINT OF SALE
                                 </span>
 
                                 <span class="dropdown-description">
