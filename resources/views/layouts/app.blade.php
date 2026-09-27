@@ -834,7 +834,7 @@
                         {{-- TRING POS --}}
 
                         <a
-                            href="#"
+                            href="https://pos.tring.id"
                             class="{{ request()->routeIs('pos.*') ? 'active' : '' }}"
                         >
 
@@ -848,7 +848,7 @@
                             <div class="dropdown-content">
 
                                 <span class="dropdown-title">
-                                    Tring POS
+                                    POINT OF SALE
                                 </span>
 
                                 <span class="dropdown-description">
