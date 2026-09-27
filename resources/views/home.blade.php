@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Tring.id - Top Up Game ')
+@section('title', 'Tring - Top Up Game ')
 
 @section('topup-active', 'active')
 
@@ -396,7 +396,7 @@
     <div class="topup-intro">
 
         <span class="topup-intro-label">
-            Tring.id Gaming
+            Tring Gaming
         </span>
 
         <h2>
@@ -615,7 +615,7 @@
 
                 <p>
                     Data transaksi diproses
-                    melalui sistem Tring.id.
+                    melalui sistem Tring
                 </p>
 
             </div>

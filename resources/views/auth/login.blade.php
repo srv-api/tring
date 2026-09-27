@@ -15,7 +15,7 @@
         content="{{ csrf_token() }}"
     >
 
-    <title>Tring.id - Login</title>
+    <title>Tring - Login</title>
 
     <link
         rel="icon"
