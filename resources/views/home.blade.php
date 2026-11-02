@@ -250,9 +250,9 @@ a{text-decoration:none;color:inherit}
                 <p>Tring Pocket Manager, teman digital untuk membantu kebutuhan sehari-hari menjadi lebih praktis, mudah, dan efisien.</p>
                 <div class="footer-social">
                     <a href="https://instagram.com/tring.id" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-                    <a href="https://facebook.com/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-                    <a href="https://tiktok.com/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
-                    <a href="https://youtube.com/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                    <a href="https://bsky.app/profile/tringid.bsky.social" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Bluesky"><i class="bi bi-bluesky"></i></a>
+                    <a href="https://tiktok.com/@tring_id" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+                    <a href="https://x.com/tring_id" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="X"><i class="bi bi-twitter-x"></i></a>
                 </div>
             </div>
 
