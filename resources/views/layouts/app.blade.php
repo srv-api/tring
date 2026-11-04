@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#7F0079">
     <meta name="description" content="Tring Pocket Manager, solusi praktis untuk mengelola aktivitas dan keuangan dalam satu aplikasi.">
     <meta name="robots" content="index, follow">
 
