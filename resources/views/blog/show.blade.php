@@ -439,7 +439,7 @@ a { text-decoration: none; color: inherit; }
         </a>
         <nav class="nav-links" aria-label="Navigasi utama">
             <a href="{{ url('/') }}">Home</a>
-            <a href="{{ url('/#tentang') }}">Tentang Tring</a>
+            <a href="{{ url('/#tentang') }}">Tentang</a>
             <a href="{{ route('blog.index') }}">Blog</a>
         </nav>
         <a href="{{ url('/#download') }}" class="nav-cta">

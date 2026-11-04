@@ -918,7 +918,7 @@ a {
 
         <nav class="nav-links" aria-label="Navigasi utama">
             <a href="#beranda">Home</a>
-            <a href="#tentang">Tentang Tring</a>
+            <a href="#tentang">Tentang</a>
             <a href="{{ route('blog.index') }}">Blog</a>
         </nav>
 
