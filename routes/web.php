@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TopUpController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\BlogController;
 
 
 /*
@@ -14,6 +15,11 @@ use App\Http\Controllers\TransactionController;
 
 Route::get('/', [TopUpController::class, 'index'])
     ->name('home');
+
+Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
+
+// Blog detail (berdasarkan slug)
+Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 
 
 /*
