@@ -16,6 +16,9 @@ use App\Http\Controllers\BlogController;
 Route::get('/', [TopUpController::class, 'index'])
     ->name('home');
 
+Route::get('/download', [TopUpController::class, 'index'])
+    ->name('home');
+
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 
 // Blog detail (berdasarkan slug)
