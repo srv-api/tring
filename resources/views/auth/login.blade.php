@@ -52,8 +52,8 @@
 
         :root {
 
-            --primary: #7F0079;
-            --primary-dark: #650061;
+            --primary: #cd130a;
+            --primary-dark: #a30f08;
             --primary-light: #F8EAF7;
 
             --white: #FFFFFF;
