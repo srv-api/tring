@@ -31,48 +31,48 @@ class LoginController extends Controller
             'password' => [
                 'required',
             ],
-            'cf-turnstile-response' => [
-                'required',
-            ],
+            // 'cf-turnstile-response' => [
+            //     'required',
+            // ],
         ], [
             'email.required' => 'Email wajib diisi.',
             'email.email' => 'Format email tidak valid.',
             'password.required' => 'Password wajib diisi.',
-            'cf-turnstile-response.required' => 'Silakan selesaikan verifikasi keamanan.',
+            // 'cf-turnstile-response.required' => 'Silakan selesaikan verifikasi keamanan.',
         ]);
 
         // 2. Verifikasi Cloudflare Turnstile
-        try {
-            $turnstileResponse = Http::asForm()
-                ->timeout(10)
-                ->post(
-                    'https://challenges.cloudflare.com/turnstile/v0/siteverify',
-                    [
-                        'secret' => config('services.turnstile.secret_key'),
-                        'response' => $request->input('cf-turnstile-response'),
-                        'remoteip' => $request->ip(),
-                    ]
-                );
+        // try {
+        //     $turnstileResponse = Http::asForm()
+        //         ->timeout(10)
+        //         ->post(
+        //             'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+        //             [
+        //                 'secret' => config('services.turnstile.secret_key'),
+        //                 'response' => $request->input('cf-turnstile-response'),
+        //                 'remoteip' => $request->ip(),
+        //             ]
+        //         );
 
-            if (
-                ! $turnstileResponse->successful() ||
-                ! $turnstileResponse->json('success')
-            ) {
-                return back()
-                    ->withErrors([
-                        'cf-turnstile-response' => 'Verifikasi keamanan gagal. Silakan coba lagi.',
-                    ])
-                    ->withInput($request->only('email'));
-            }
-        } catch (\Throwable $e) {
-            report($e);
+        //     if (
+        //         ! $turnstileResponse->successful() ||
+        //         ! $turnstileResponse->json('success')
+        //     ) {
+        //         return back()
+        //             ->withErrors([
+        //                 'cf-turnstile-response' => 'Verifikasi keamanan gagal. Silakan coba lagi.',
+        //             ])
+        //             ->withInput($request->only('email'));
+        //     }
+        // } catch (\Throwable $e) {
+        //     report($e);
 
-            return back()
-                ->withErrors([
-                    'cf-turnstile-response' => 'Tidak dapat menghubungi layanan keamanan. Silakan coba lagi.',
-                ])
-                ->withInput($request->only('email'));
-        }
+        //     return back()
+        //         ->withErrors([
+        //             'cf-turnstile-response' => 'Tidak dapat menghubungi layanan keamanan. Silakan coba lagi.',
+        //         ])
+        //         ->withInput($request->only('email'));
+        // }
 
         // 3. Ambil hanya kredensial yang diperlukan untuk login
         $credentials = [
@@ -87,7 +87,7 @@ class LoginController extends Controller
             $request->session()->regenerate();
 
             return redirect()
-                ->intended(route('topup.index'))
+                ->intended(route('admin.dashboard'))
                 ->with('success', 'Login berhasil. Selamat datang kembali!');
         }
 

@@ -5,7 +5,9 @@ use App\Http\Controllers\TopUpController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\BlogController;
-
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ArticleController;
+use App\Http\Controllers\Admin\PageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,9 +41,24 @@ Route::post('/login', [LoginController::class, 'login'])
 
 Route::post('/logout', [LoginController::class, 'logout'])
     ->name('logout');
-
-
 /*
+|--------------------------------------------------------------------------
+| ADMIN CMS
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware(['auth', 'admin'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+
+        // Dashboard
+        Route::get('/dashboard', [DashboardController::class, 'index'])
+            ->name('dashboard');
+        Route::resource('articles', ArticleController::class);
+        Route::resource('pages', PageController::class);
+
+    });/*
 |--------------------------------------------------------------------------
 | TOP UP
 |--------------------------------------------------------------------------
@@ -169,3 +186,4 @@ Route::get('/cek-transaksi', [TransactionController::class, 'index'])
 
 Route::post('/cek-transaksi', [TransactionController::class, 'check'])
     ->name('transaction.check.submit');
+
