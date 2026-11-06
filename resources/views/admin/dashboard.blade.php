@@ -528,10 +528,11 @@
 
 </a>
 
-            <a href="{{ url('/admin/categories') }}">
-                <i class="bi bi-folder2"></i>
-                Kategori
-            </a>
+<a href="{{ route('admin.categories.index') }}"
+   class="{{ request()->routeIs('admin.categories.*') ? 'active' : '' }}">
+    <i class="bi bi-tags"></i>
+    Kategori
+</a>
 
             <a href="{{ url('/admin/media') }}">
                 <i class="bi bi-images"></i>

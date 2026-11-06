@@ -732,9 +732,11 @@ a { text-decoration: none; color: inherit; }
 
             <div class="category-filter">
                 @foreach ($categories as $cat)
-                    <a href="{{ route('blog.index', $cat === 'Semua' ? [] : ['category' => $cat]) }}"
-                       class="category-chip {{ $activeCategory === $cat ? 'active' : '' }}">
-                        {{ $cat }}
+                    <a
+                        href="{{ route('blog.index', ['category' => $cat->slug]) }}"
+                        class="category-chip {{ $activeCategory === $cat->slug ? 'active' : '' }}"
+                    >
+                        {{ $cat->name }}
                     </a>
                 @endforeach
             </div>
@@ -750,25 +752,33 @@ a { text-decoration: none; color: inherit; }
                 <div class="blog-main">
                     @if (count($articles))
                         <div class="blog-grid">
-                            @foreach ($articles as $article)
-                                <a href="{{ route('blog.show', $article['slug']) }}" class="blog-card">
-                                    <div class="blog-card-cover">
-                                        <img src="{{ $article['cover'] }}" alt="{{ $article['title'] }}" loading="lazy">
-                                    </div>
-                                    <div class="blog-card-body">
-                                        <span class="blog-card-cat">{{ $article['category'] }}</span>
-                                        <h2 class="blog-card-title">{{ $article['title'] }}</h2>
-                                        <p class="blog-card-excerpt">{{ $article['excerpt'] }}</p>
-                                        <div class="blog-card-meta">
-                                            <span class="author">
-                                                <i class="bi bi-person-circle"></i>
-                                                {{ $article['author'] }}
-                                            </span>
-                                            <span>{{ \Carbon\Carbon::parse($article['date'])->translatedFormat('d M Y') }}</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            @endforeach
+                       @forelse($articles as $article)
+    <a href="{{ route('blog.show', $article->slug) }}" class="blog-card">
+        <div class="blog-card-cover">
+            <img src="{{ $article->thumbnail
+                    ? asset('storage/' . $article->thumbnail)
+                    : asset('images/default-blog.jpg') }}"
+                 alt="{{ $article->title }}"
+                 loading="lazy">
+        </div>
+        <div class="blog-card-body">
+            <span class="blog-card-cat">{{ $article->category?->name ?? 'Umum' }}</span>
+            <h2 class="blog-card-title">{{ $article->title }}</h2>
+            <p class="blog-card-excerpt">{{ $article->excerpt }}</p>
+            <div class="blog-card-meta">
+                <span class="author">
+                    <i class="bi bi-person-circle"></i>
+                    {{ $article->user?->name ?? 'Tim Tring' }}
+                </span>
+                <span>{{ $article->published_at?->translatedFormat('d M Y') }}</span>
+            </div>
+        </div>
+    </a>
+@empty
+    <p>Belum ada artikel yang dipublikasikan.</p>
+@endforelse
+
+{{ $articles->links() }}
                         </div>
                     @else
                         <div class="blog-empty">
@@ -779,82 +789,8 @@ a { text-decoration: none; color: inherit; }
                 </div>
 
                 {{-- SIDEBAR (kanan) — inline, tidak pakai @include --}}
-                <aside class="blog-sidebar">
+                @include('blog.sidebar')
 
-                    {{-- SEARCH --}}
-                    <div class="sidebar-card">
-                        <h3 class="sidebar-title">
-                            <i class="bi bi-search"></i>
-                            Cari Artikel
-                        </h3>
-                        <form action="{{ route('blog.index') }}" method="GET" class="sidebar-search">
-                            <input type="text"
-                                   name="q"
-                                   placeholder="Cari artikel..."
-                                   value="{{ request('q') }}"
-                                   aria-label="Cari artikel">
-                            <button type="submit" aria-label="Cari">
-                                <i class="bi bi-search"></i>
-                            </button>
-                        </form>
-                    </div>
-
-                    {{-- KATEGORI --}}
-                    <div class="sidebar-card">
-                        <h3 class="sidebar-title">
-                            <i class="bi bi-tags"></i>
-                            Kategori
-                        </h3>
-                        <ul class="sidebar-list">
-                            @foreach ($categories as $cat)
-                                <li>
-                                    <a href="{{ route('blog.index', $cat === 'Semua' ? [] : ['category' => $cat]) }}"
-                                       class="{{ $activeCategory === $cat ? 'is-active' : '' }}">
-                                        <span>{{ $cat }}</span>
-                                        <i class="bi bi-chevron-right"></i>
-                                    </a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-
-                    {{-- ARTIKEL POPULER --}}
-                    @if (!empty($popular))
-                        <div class="sidebar-card">
-                            <h3 class="sidebar-title">
-                                <i class="bi bi-fire"></i>
-                                Artikel Populer
-                            </h3>
-                            <div class="sidebar-popular">
-                                @foreach ($popular as $pop)
-                                    <a href="{{ route('blog.show', $pop['slug']) }}" class="popular-item">
-                                        <div class="popular-thumb">
-                                            <img src="{{ $pop['cover'] }}" alt="{{ $pop['title'] }}" loading="lazy">
-                                        </div>
-                                        <div class="popular-info">
-                                            <div class="popular-title">{{ $pop['title'] }}</div>
-                                            <div class="popular-meta">
-                                                <i class="bi bi-calendar3"></i>
-                                                {{ \Carbon\Carbon::parse($pop['date'])->translatedFormat('d M Y') }}
-                                            </div>
-                                        </div>
-                                    </a>
-                                @endforeach
-                            </div>
-                        </div>
-                    @endif
-
-                    {{-- CTA DOWNLOAD --}}
-                    <div class="sidebar-card sidebar-cta">
-                        <h3>Download Tring</h3>
-                        <p>Kelola aktivitas harian dalam satu aplikasi.</p>
-                        <a href="{{ url('/#download') }}" class="sidebar-cta-btn">
-                            Download App
-                            <i class="bi bi-arrow-right"></i>
-                        </a>
-                    </div>
-
-                </aside>
 
             </div>
         </div>

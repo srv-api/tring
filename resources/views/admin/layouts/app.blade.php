@@ -228,21 +228,27 @@
             <i class="bi bi-file-earmark-text"></i> Halaman
         </a>
 
-        <a href="{{ url('/admin/categories') }}">
-            <i class="bi bi-folder2"></i> Kategori
-        </a>
+        <a href="{{ route('admin.categories.index') }}"
+   class="{{ request()->routeIs('admin.categories.*') ? 'active' : '' }}">
+    <i class="bi bi-tags"></i>
+    Kategori
+</a>
 
-        <a href="{{ url('/admin/media') }}">
-            <i class="bi bi-images"></i> Media Library
-        </a>
+<a href="{{ route('admin.media.index') }}"
+   class="{{ request()->routeIs('admin.media.*') ? 'active' : '' }}">
+    <i class="bi bi-images"></i>
+    Media Library
+</a>
     </nav>
 
     <div class="menu-label">Website Management</div>
 
     <nav class="menu">
-        <a href="{{ url('/admin/users') }}">
-            <i class="bi bi-people"></i> Pengguna
-        </a>
+      <a href="{{ route('admin.users.index') }}"
+   class="{{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
+    <i class="bi bi-people"></i>
+    Pengguna
+</a>
 
         <a href="{{ url('/admin/menus') }}">
             <i class="bi bi-list"></i> Menu Navigasi

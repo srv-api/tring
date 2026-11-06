@@ -8,7 +8,9 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\PageController;
-
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\MediaController;
+use App\Http\Controllers\Admin\UserController;
 /*
 |--------------------------------------------------------------------------
 | HOME
@@ -57,7 +59,10 @@ Route::middleware(['auth', 'admin'])
             ->name('dashboard');
         Route::resource('articles', ArticleController::class);
         Route::resource('pages', PageController::class);
-
+        Route::resource('categories', CategoryController::class);
+        Route::resource('users', UserController::class);
+        Route::resource('media', MediaController::class)
+    ->only(['index', 'create', 'store', 'show', 'destroy']);
     });/*
 |--------------------------------------------------------------------------
 | TOP UP
