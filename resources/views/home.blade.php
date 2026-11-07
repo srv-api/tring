@@ -15,9 +15,7 @@
     --border: #EEE7F0;
 }
 
-*,
-*::before,
-*::after {
+*, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -57,13 +55,14 @@ a {
 .header {
     width: 100%;
     height: 78px;
-    background: rgba(255,255,255,.96);
+    background: rgba(255,255,255,.97);
     border-bottom: 1px solid #f0eaf1;
     display: flex;
     align-items: center;
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 9999;
+    isolation: isolate;
 }
 
 .nav {
@@ -72,6 +71,7 @@ a {
     justify-content: space-between;
     gap: 24px;
     min-width: 0;
+    position: relative;
 }
 
 .brand {
@@ -111,7 +111,7 @@ a {
     color: var(--primary);
 }
 
-/* DOWNLOAD APP DI DALAM MENU HAMBURGER */
+/* DOWNLOAD APP DI HAMBURGER */
 .nav-mobile-download {
     display: none;
 }
@@ -140,29 +140,7 @@ a {
     flex: 1;
 }
 
-.nav-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 9px;
-    background: var(--primary);
-    color: #fff;
-    padding: 13px 20px;
-    border-radius: 10px;
-    font-size: 13px;
-    font-weight: 700;
-    transition: .2s;
-    white-space: nowrap;
-    flex-shrink: 0;
-}
-
-.nav-cta:hover {
-    background: var(--primary-dark);
-    color: #fff;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 22px rgba(205,19,10,.2);
-}
-
-/* NAVIGATION ACTIONS */
+/* NAV ACTIONS */
 .nav-actions {
     display: flex;
     align-items: center;
@@ -172,8 +150,8 @@ a {
 
 .menu-toggle {
     display: none;
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
     align-items: center;
     justify-content: center;
     border: 1px solid #e5e5e5;
@@ -183,6 +161,10 @@ a {
     font-size: 25px;
     cursor: pointer;
     transition: .2s;
+    position: relative;
+    z-index: 10001;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .menu-toggle:hover {
@@ -197,11 +179,7 @@ a {
     width: 100%;
     max-width: 100%;
     overflow: hidden;
-    background: linear-gradient(
-        120deg,
-        #fff 25%,
-        #fff8f7 100%
-    );
+    background: linear-gradient(120deg, #fff 25%, #fff8f7 100%);
     min-height: 650px;
     display: flex;
     align-items: center;
@@ -248,6 +226,8 @@ a {
 
 .hero-content {
     min-width: 0;
+    position: relative;
+    z-index: 5;
 }
 
 .eyebrow {
@@ -291,15 +271,8 @@ a {
     margin: 23px 0 28px;
 }
 
-/* DOWNLOAD BADGES */
-.hero-actions {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-    max-width: 100%;
-}
-
+/* DOWNLOAD BUTTONS */
+.hero-actions,
 .store-buttons {
     display: flex;
     align-items: center;
@@ -320,6 +293,9 @@ a {
     border: 1px solid #211325;
     border-radius: 10px;
     transition: all .25s ease;
+    position: relative;
+    z-index: 10;
+    touch-action: manipulation;
 }
 
 .store-btn:hover {
@@ -376,6 +352,7 @@ a {
 .visual {
     position: relative;
     min-width: 0;
+    pointer-events: none;
     min-height: 490px;
     display: flex;
     justify-content: center;
@@ -388,12 +365,9 @@ a {
     height: 370px;
     max-width: 85%;
     border-radius: 50%;
-    background: linear-gradient(
-        145deg,
-        #f4c4c0,
-        #fff0ef
-    );
+    background: linear-gradient(145deg, #f4c4c0, #fff0ef);
     opacity: .8;
+    pointer-events: none;
 }
 
 .phone {
@@ -409,6 +383,7 @@ a {
     transform: rotate(-5deg);
     z-index: 2;
     flex-shrink: 0;
+    pointer-events: none;
 }
 
 .phone-screen {
@@ -460,11 +435,7 @@ a {
 }
 
 .balance-card {
-    background: linear-gradient(
-        135deg,
-        var(--primary),
-        var(--primary-dark)
-    );
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
     padding: 18px 14px;
     border-radius: 16px;
     color: #fff;
@@ -582,6 +553,7 @@ a {
     border-radius: 15px;
     box-shadow: 0 15px 40px rgba(52,20,59,.10);
     max-width: calc(100% - 10px);
+    pointer-events: none;
 }
 
 .float-one {
@@ -721,6 +693,8 @@ a {
     font-size: 12px;
     font-weight: 800;
     transition: .2s;
+    position: relative;
+    z-index: 2;
 }
 
 .footer-download:hover {
@@ -734,7 +708,7 @@ a {
 }
 
 .footer-bottom {
-    border-top: 1px solid #49394d;
+    border-top: 1px solid rgba(255,255,255,.25);
     min-height: 64px;
     display: flex;
     align-items: center;
@@ -751,7 +725,7 @@ a {
 }
 
 .footer-bottom a:hover {
-    color: var(--primary);
+    color: #ffd5d2;
 }
 
 .footer-legal {
@@ -799,6 +773,56 @@ a {
     }
 }
 
+/* TABLET DAN HANDPHONE LEBAR */
+@media (min-width: 681px) and (max-width: 900px) {
+    .nav {
+        position: relative;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav-actions {
+        position: relative;
+        z-index: 10003;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: calc(100% + 8px);
+        right: 0;
+        width: min(320px, calc(100vw - 56px));
+        z-index: 10002;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 8px;
+        background: #fff;
+        border: 1px solid #eee;
+        border-radius: 12px;
+        box-shadow: 0 12px 30px rgba(0,0,0,.12);
+        pointer-events: auto;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links > a {
+        display: block;
+        padding: 13px 14px;
+        border-radius: 8px;
+        font-size: 14px;
+    }
+
+    .nav-mobile-download {
+        display: block;
+        padding: 5px;
+    }
+}
+
 /* MOBILE */
 @media (max-width: 680px) {
     .container {
@@ -827,11 +851,8 @@ a {
 
     .nav-actions {
         gap: 8px;
-    }
-
-    .nav-cta {
-        padding: 10px 12px;
-        font-size: 11px;
+        position: relative;
+        z-index: 10003;
     }
 
     .menu-toggle {
@@ -842,17 +863,20 @@ a {
         display: none;
         position: absolute;
         top: calc(100% + 8px);
-        left: 20px;
-        right: 20px;
-        z-index: 1001;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 10002;
         flex-direction: column;
+        pointer-events: auto;
+        touch-action: manipulation;
         align-items: stretch;
         gap: 0;
         padding: 8px;
         background: #fff;
         border: 1px solid #eee;
         border-radius: 12px;
-        box-shadow: 0 12px 30px rgba(0, 0, 0, .10);
+        box-shadow: 0 12px 30px rgba(0,0,0,.10);
     }
 
     .nav-links.active {
@@ -864,7 +888,7 @@ a {
         padding: 5px;
     }
 
-    .nav-links a {
+    .nav-links > a {
         display: block;
         padding: 13px 14px;
         border-radius: 8px;
@@ -911,6 +935,7 @@ a {
         padding: 11px 10px;
         gap: 8px;
     }
+
     .store-btn > i {
         font-size: 25px;
     }
@@ -998,7 +1023,24 @@ a {
     }
 }
 
-/* HORIZONTAL OVERFLOW PROTECTION */
+/* PERBAIKAN AREA KLIK DAN OVERFLOW */
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button,
+a,
+input {
+    touch-action: manipulation;
+}
+
+.hero::before,
+.hero::after,
+.visual-glow {
+    pointer-events: none;
+}
+
 @supports not (overflow: clip) {
     html,
     body {
@@ -1019,11 +1061,13 @@ a {
         </a>
 
         <nav class="nav-links" id="mobileNav" aria-label="Navigasi utama">
+
             <a href="{{ url('/') }}">Home</a>
+
             <a href="{{ url('/#tentang') }}">Tentang</a>
+
             <a href="{{ route('blog.index') }}">Blog</a>
 
-            {{-- Download App berada di dalam menu hamburger --}}
             <div class="nav-mobile-download">
                 <a href="{{ url('/#download') }}">
                     <i class="bi bi-download"></i>
@@ -1031,9 +1075,11 @@ a {
                     <i class="bi bi-arrow-up-right"></i>
                 </a>
             </div>
+
         </nav>
 
         <div class="nav-actions">
+
             <button
                 type="button"
                 class="menu-toggle"
@@ -1044,6 +1090,7 @@ a {
             >
                 <i class="bi bi-list"></i>
             </button>
+
         </div>
 
     </div>
@@ -1402,22 +1449,37 @@ a {
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+
     const menuToggle = document.getElementById('menuToggle');
     const mobileNav = document.getElementById('mobileNav');
 
-    if (!menuToggle || !mobileNav) return;
+    if (!menuToggle || !mobileNav) {
+        return;
+    }
 
     function closeMenu() {
+
         mobileNav.classList.remove('active');
+
         menuToggle.setAttribute('aria-expanded', 'false');
-        menuToggle.setAttribute('aria-label', 'Buka menu navigasi');
+
+        menuToggle.setAttribute(
+            'aria-label',
+            'Buka menu navigasi'
+        );
+
         menuToggle.innerHTML = '<i class="bi bi-list"></i>';
     }
 
-    menuToggle.addEventListener('click', function () {
+    function toggleMenu() {
+
         const isOpen = mobileNav.classList.toggle('active');
 
-        menuToggle.setAttribute('aria-expanded', isOpen);
+        menuToggle.setAttribute(
+            'aria-expanded',
+            isOpen ? 'true' : 'false'
+        );
+
         menuToggle.setAttribute(
             'aria-label',
             isOpen ? 'Tutup menu navigasi' : 'Buka menu navigasi'
@@ -1426,26 +1488,55 @@ document.addEventListener('DOMContentLoaded', function () {
         menuToggle.innerHTML = isOpen
             ? '<i class="bi bi-x-lg"></i>'
             : '<i class="bi bi-list"></i>';
+    }
+
+    menuToggle.addEventListener('click', function (event) {
+
+        event.preventDefault();
+
+        event.stopPropagation();
+
+        toggleMenu();
+
     });
 
     mobileNav.querySelectorAll('a').forEach(function (link) {
-        link.addEventListener('click', closeMenu);
+
+        link.addEventListener('click', function () {
+
+            closeMenu();
+
+        });
+
     });
 
     document.addEventListener('click', function (event) {
+
         if (
             !mobileNav.contains(event.target) &&
             !menuToggle.contains(event.target)
         ) {
             closeMenu();
         }
+
     });
 
     document.addEventListener('keydown', function (event) {
+
         if (event.key === 'Escape') {
             closeMenu();
         }
+
     });
+
+    window.addEventListener('resize', function () {
+
+        if (window.innerWidth > 900) {
+            closeMenu();
+        }
+
+    });
+
 });
 </script>
 
