@@ -1028,7 +1028,6 @@ a {
                         <div class="app-top">
 
                             <div class="app-logo">
-                                <i class="bi bi-stars"></i>
                                 Tring.
                             </div>
 
