@@ -651,58 +651,54 @@ a { text-decoration: none; color: inherit; }
     </div>
 
     {{-- ARTICLE BODY --}}
-    <article class="article-body">
+   {{-- ARTICLE BODY --}}
+<article class="article-body">
 
-        {!! $article->content !!}
+    @php
+        $content = trim($article->content ?? '');
 
-        {{-- SHARE --}}
-        <div class="share-bar">
+        // Jika konten sudah berisi HTML, tampilkan sebagai HTML.
+        $containsHtml = $content !== '' && $content !== strip_tags($content);
+    @endphp
 
-            <strong>Bagikan artikel ini:</strong>
+    @if($containsHtml)
+        {!! $content !!}
+    @else
+        @foreach(preg_split('/\r\n|\r|\n/', $content) as $paragraph)
+            @if(trim($paragraph) !== '')
+                <p>{{ trim($paragraph) }}</p>
+            @endif
+        @endforeach
+    @endif
 
-            <div class="share-links">
+    {{-- SHARE --}}
+    <div class="share-bar">
+        <strong>Bagikan artikel ini:</strong>
 
-                <a
-                    href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(request()->url()) }}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Facebook"
-                >
-                    <i class="bi bi-facebook"></i>
-                </a>
+        <div class="share-links">
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(request()->url()) }}"
+               target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                <i class="bi bi-facebook"></i>
+            </a>
 
-                <a
-                    href="https://twitter.com/intent/tweet?url={{ urlencode(request()->url()) }}&text={{ urlencode($article->title) }}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="X"
-                >
-                    <i class="bi bi-twitter-x"></i>
-                </a>
+            <a href="https://twitter.com/intent/tweet?url={{ urlencode(request()->url()) }}&text={{ urlencode($article->title) }}"
+               target="_blank" rel="noopener noreferrer" aria-label="X">
+                <i class="bi bi-twitter-x"></i>
+            </a>
 
-                <a
-                    href="https://wa.me/?text={{ urlencode($article->title . ' ' . request()->url()) }}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="WhatsApp"
-                >
-                    <i class="bi bi-whatsapp"></i>
-                </a>
+            <a href="https://wa.me/?text={{ urlencode($article->title . ' ' . request()->url()) }}"
+               target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                <i class="bi bi-whatsapp"></i>
+            </a>
 
-                <a
-                    href="https://www.linkedin.com/sharing/share-offsite/?url={{ urlencode(request()->url()) }}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="LinkedIn"
-                >
-                    <i class="bi bi-linkedin"></i>
-                </a>
-
-            </div>
-
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ urlencode(request()->url()) }}"
+               target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <i class="bi bi-linkedin"></i>
+            </a>
         </div>
+    </div>
 
-    </article>
+</article>
 
     {{-- RELATED ARTICLES --}}
     @if($related->isNotEmpty())
