@@ -111,6 +111,35 @@ a {
     color: var(--primary);
 }
 
+/* DOWNLOAD APP DI DALAM MENU HAMBURGER */
+.nav-mobile-download {
+    display: none;
+}
+
+.nav-mobile-download a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 13px 14px;
+    margin-top: 6px;
+    border-radius: 9px;
+    background: var(--primary);
+    color: #fff !important;
+    font-size: 13px;
+    font-weight: 700;
+    transition: .2s;
+}
+
+.nav-mobile-download a:hover {
+    background: var(--primary-dark) !important;
+    color: #fff !important;
+}
+
+.nav-mobile-download a span {
+    flex: 1;
+}
+
 .nav-cta {
     display: inline-flex;
     align-items: center;
@@ -131,6 +160,35 @@ a {
     color: #fff;
     transform: translateY(-2px);
     box-shadow: 0 8px 22px rgba(205,19,10,.2);
+}
+
+/* NAVIGATION ACTIONS */
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.menu-toggle {
+    display: none;
+    width: 42px;
+    height: 42px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    background: #fff;
+    color: var(--dark);
+    font-size: 25px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.menu-toggle:hover {
+    background: var(--primary-light);
+    border-color: var(--primary-border);
+    color: var(--primary);
 }
 
 /* HERO */
@@ -761,16 +819,61 @@ a {
     }
 
     .nav {
+        position: relative;
+        height: 100%;
+        justify-content: space-between;
         gap: 10px;
+    }
+
+    .nav-actions {
+        gap: 8px;
+    }
+
+    .nav-cta {
+        padding: 10px 12px;
+        font-size: 11px;
+    }
+
+    .menu-toggle {
+        display: flex;
     }
 
     .nav-links {
         display: none;
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 20px;
+        right: 20px;
+        z-index: 1001;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 8px;
+        background: #fff;
+        border: 1px solid #eee;
+        border-radius: 12px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, .10);
     }
 
-    .nav-cta {
-        padding: 11px 13px;
-        font-size: 11px;
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-mobile-download {
+        display: block;
+        padding: 5px;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 13px 14px;
+        border-radius: 8px;
+        font-size: 14px;
+    }
+
+    .nav-links a:hover {
+        background: var(--primary-light);
+        color: var(--primary);
     }
 
     .hero {
@@ -808,7 +911,6 @@ a {
         padding: 11px 10px;
         gap: 8px;
     }
-
     .store-btn > i {
         font-size: 25px;
     }
@@ -916,16 +1018,33 @@ a {
             <span>Tring.</span>
         </a>
 
-        <nav class="nav-links" aria-label="Navigasi utama">
-            <a href="#beranda">Home</a>
-            <a href="#tentang">Tentang</a>
+        <nav class="nav-links" id="mobileNav" aria-label="Navigasi utama">
+            <a href="{{ url('/') }}">Home</a>
+            <a href="{{ url('/#tentang') }}">Tentang</a>
             <a href="{{ route('blog.index') }}">Blog</a>
+
+            {{-- Download App berada di dalam menu hamburger --}}
+            <div class="nav-mobile-download">
+                <a href="{{ url('/#download') }}">
+                    <i class="bi bi-download"></i>
+                    <span>Download App</span>
+                    <i class="bi bi-arrow-up-right"></i>
+                </a>
+            </div>
         </nav>
 
-        <a href="#download" class="nav-cta">
-            Download App
-            <i class="bi bi-arrow-up-right"></i>
-        </a>
+        <div class="nav-actions">
+            <button
+                type="button"
+                class="menu-toggle"
+                id="menuToggle"
+                aria-label="Buka menu navigasi"
+                aria-expanded="false"
+                aria-controls="mobileNav"
+            >
+                <i class="bi bi-list"></i>
+            </button>
+        </div>
 
     </div>
 </header>
@@ -1280,5 +1399,54 @@ a {
     </div>
 
 </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileNav = document.getElementById('mobileNav');
+
+    if (!menuToggle || !mobileNav) return;
+
+    function closeMenu() {
+        mobileNav.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-label', 'Buka menu navigasi');
+        menuToggle.innerHTML = '<i class="bi bi-list"></i>';
+    }
+
+    menuToggle.addEventListener('click', function () {
+        const isOpen = mobileNav.classList.toggle('active');
+
+        menuToggle.setAttribute('aria-expanded', isOpen);
+        menuToggle.setAttribute(
+            'aria-label',
+            isOpen ? 'Tutup menu navigasi' : 'Buka menu navigasi'
+        );
+
+        menuToggle.innerHTML = isOpen
+            ? '<i class="bi bi-x-lg"></i>'
+            : '<i class="bi bi-list"></i>';
+    });
+
+    mobileNav.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('click', function (event) {
+        if (
+            !mobileNav.contains(event.target) &&
+            !menuToggle.contains(event.target)
+        ) {
+            closeMenu();
+        }
+    });
+
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+            closeMenu();
+        }
+    });
+});
+</script>
 
 @endsection
