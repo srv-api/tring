@@ -11,6 +11,8 @@ use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\MenuController;
+
 /*
 |--------------------------------------------------------------------------
 | HOME
@@ -61,6 +63,7 @@ Route::middleware(['auth', 'admin'])
         Route::resource('pages', PageController::class);
         Route::resource('categories', CategoryController::class);
         Route::resource('users', UserController::class);
+        Route::resource('menus', MenuController::class)->except(['show']);
         Route::resource('media', MediaController::class)
     ->only(['index', 'create', 'store', 'show', 'destroy']);
     });/*

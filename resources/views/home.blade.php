@@ -1066,7 +1066,7 @@ input {
 
             <a href="{{ url('/#tentang') }}">Tentang</a>
 
-            <a href="{{ route('blog.index') }}">Blog</a>
+            <a href="{{ route('blog.index') }}">News</a>
 
             <div class="nav-mobile-download">
                 <a href="{{ url('/#download') }}">

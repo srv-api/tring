@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="{{ asset('tring.png') }}">
+<meta name="icedrink-verify" content="">
 
     <title>@yield('title', 'Admin Tring CMS')</title>
 
@@ -251,9 +252,13 @@
     Pengguna
 </a>
 
-        <a href="{{ url('/admin/menus') }}">
-            <i class="bi bi-list"></i> Menu Navigasi
-        </a>
+<a href="{{ route('admin.menus.index') }}"
+   class="nav-link {{ request()->routeIs('admin.menus.*') ? 'active' : '' }}">
+
+    <i class="bi bi-list-nested"></i>
+    <span>Menu Navigasi</span>
+
+</a>
 
         <a href="{{ url('/admin/seo') }}">
             <i class="bi bi-search"></i> Pengaturan SEO
