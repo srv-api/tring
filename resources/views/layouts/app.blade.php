@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Tring Pocket Manager, solusi praktis untuk mengelola aktivitas dan keuangan dalam satu aplikasi.">
     <meta name="robots" content="index, follow">
-    <meta name="icedrink-verify" content="">
+<meta name="icedrink-verify" content="icedrink-XmBbUOsVUdvsm6us9GWjquceCj5hlwSMAQyRIaah">
 
     <title>@yield('title', 'Tring - Pocket Manager')</title>
 
