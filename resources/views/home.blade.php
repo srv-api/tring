@@ -1539,5 +1539,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 </script>
-
+@push('scripts')
+<script src="http://localhost:8000/widget/rating.js"
+        data-public-key="pk_D22VOYE8RLPXQ86sf4kJNhoeKHrHc8KbIOsj1LqA"
+        defer></script>
+@endpush
 @endsection
